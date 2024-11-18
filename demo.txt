@@ -1,4 +1,2 @@
 hi  this is my demo class
 i added secon line for refrence
-this is my thired line
-this is my forth line
