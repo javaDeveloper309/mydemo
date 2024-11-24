@@ -1,10 +1,2 @@
-my thired file with some data
-jhkjjjkj
-fkdhkfjhjkd
-gfgjdflgjldf
-ljfglkj
-dfkjkfjkl
-fsfjdkjf
-test
 
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
+my thired file with some data
