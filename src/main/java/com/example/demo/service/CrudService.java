@@ -3,24 +3,59 @@ import com.example.demo.controller.UpdateRequest;
 import com.example.demo.dao.CompanyRepository;
 import com.example.demo.dao.DepartmentRepository;
 import com.example.demo.dao.EmployeeRepository;
+import com.example.demo.dao.TaskRepository;
 import com.example.demo.entity.Company;
 import com.example.demo.entity.Department;
 import com.example.demo.entity.Employee;
+import com.example.demo.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class CrudService {
 
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private TaskRepository taskRepository;
+
 
     @Autowired
     private DepartmentRepository departmentRepository;
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+
+
+
+    public Task createTask(Task task) {
+        return taskRepository.save(task);
+    }
+
+    // READ Task by Employee ID
+    public List<Task> getTasksByEmployeeId(Long employeeId) {
+        return taskRepository.findTasksByEmployeeId(employeeId);
+    }
+
+    // UPDATE Task
+    public Task updateTask(Long taskId, Task updatedTask) {
+        Task task = taskRepository.findById(taskId).orElseThrow(() -> new RuntimeException("Task not found"));
+        task.setName(updatedTask.getName());
+        task.setStatus(updatedTask.getStatus());
+        task.setEmployee(updatedTask.getEmployee());
+        return taskRepository.save(task);
+    }
+
+    // DELETE Task
+    public void deleteTask(Long taskId) {
+        taskRepository.deleteById(taskId);
+    }
+    /*=================================================*/
+
 
     // Create Company, Department, Employee
     public Company createCompany(Company company) {

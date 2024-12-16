@@ -1,15 +1,20 @@
 package com.example.demo.entity;
 
-
 import jakarta.persistence.*;
 
-
 @Entity
+@Table(name = "employee") // Maps the class to the 'employees' table
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate IDs
+    @Column(name = "employee_id")
     private Long id;
+
+    @Column(name = "name", nullable = false) // Maps to the 'name' column, cannot be null
     private String name;
+
+    @Column(name = "role") // Maps to the 'role' column
     private String role;
 
     // No-arg constructor

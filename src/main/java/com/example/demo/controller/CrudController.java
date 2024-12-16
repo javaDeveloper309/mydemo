@@ -3,10 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.entity.Company;
 import com.example.demo.entity.Department;
 import com.example.demo.entity.Employee;
+import com.example.demo.entity.Task;
 import com.example.demo.service.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -14,6 +17,37 @@ public class CrudController {
 
     @Autowired
     private CrudService crudService;
+//
+//    @Autowired
+//    private CrudService crudService;
+// CREATE Task
+@PostMapping("/task")
+public ResponseEntity<Task> createTask(@RequestBody Task task) {
+    return ResponseEntity.ok(crudService.createTask(task));
+}
+
+    // READ Tasks by Employee ID
+    @GetMapping("/tasks/employee/{employeeId}")
+    public ResponseEntity<List<Task>> getTasksByEmployee(@PathVariable Long employeeId) {
+        return ResponseEntity.ok(crudService.getTasksByEmployeeId(employeeId));
+    }
+
+    // UPDATE Task
+    @PutMapping("/task/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
+        return ResponseEntity.ok(crudService.updateTask(id, task));
+    }
+
+    // DELETE Task
+    @DeleteMapping("/task/{id}")
+    public ResponseEntity<String> deleteTask(@PathVariable Long id) {
+        crudService.deleteTask(id);
+        return ResponseEntity.ok("Task deleted successfully");
+    }
+
+
+
+/////////////////////////////////////////////////////
 
     // CREATE
     @PostMapping("/company")
